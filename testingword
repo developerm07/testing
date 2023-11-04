@@ -1,0 +1,199 @@
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+public class GitHubCommitCounterWithPaginationAndSafety {
+    public static void main(String[] args) {
+        String accessToken = "YOUR_ACCESS_TOKEN";
+        String developerUsername = "DEVELOPER_USERNAME";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date startDate = getStartDate(); // Define your start date
+        Date endDate = new Date();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .build();
+
+        Map<String, Map<String, Integer>> developerCommitData = new HashMap<>();
+        Object mapLock = new Object();
+
+        try {
+            // Step 1: Retrieve organizations of the developer
+            String orgsApiUrl = "https://api.github.com/users/" + developerUsername + "/orgs";
+            Request orgsRequest = new Request.Builder()
+                    .url(orgsApiUrl)
+                    .header("Authorization", "Bearer " + accessToken)
+                    .build();
+
+            Response orgsResponse = client.newCall(orgsRequest).execute();
+            String orgsResponseBody = orgsResponse.body().string();
+            JsonArray orgs = JsonParser.parseString(orgsResponseBody).getAsJsonArray();
+
+            for (int i = 0; i < orgs.size(); i++) {
+                JsonObject org = orgs.get(i).getAsJsonObject();
+                String orgName = org.get("login").getAsString();
+
+                // Step 2: Fetch repositories for the organization with pagination
+                List<JsonObject> allRepos = fetchAllRepositories(client, accessToken, orgName);
+
+                for (JsonObject repo : allRepos) {
+                    String repoName = repo.get("name").getAsString();
+
+                    // Step 3: Fetch branches for the repository with pagination
+                    List<JsonObject> allBranches = fetchAllBranches(client, accessToken, orgName, repoName);
+
+                    for (JsonObject branch : allBranches) {
+                        String branchName = branch.get("name").getAsString();
+
+                        // Step 4: Fetch commits for the branch within the date range with pagination
+                        List<JsonObject> allCommits = fetchAllCommits(client, accessToken, orgName, repoName, branchName, startDate, endDate);
+                        int commitCount = allCommits.size();
+
+                        // Store commit count in the map with synchronization
+                        synchronized (mapLock) {
+                            developerCommitData.computeIfAbsent(orgName, k -> new HashMap<>()).put(branchName, commitCount);
+                        }
+                    }
+                }
+            }
+
+            // Print the collected data
+            developerCommitData.forEach((orgName, branchCommitData) -> {
+                System.out.println("Organization: " + orgName);
+                branchCommitData.forEach((branchName, commitCount) -> {
+                    System.out.println("Branch: " + branchName + " Commits: " + commitCount);
+                });
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Define your start date logic here
+    private static Date getStartDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1); // For the last month
+        return calendar.getTime();
+    }
+
+    // Fetch all repositories for an organization with pagination
+    private static List<JsonObject> fetchAllRepositories(OkHttpClient client, String accessToken, String orgName) {
+        List<JsonObject> allRepos = new ArrayList<>();
+        int page = 1;
+        int perPage = 100; // Maximum items per page
+
+        while (true) {
+            String reposApiUrl = "https://api.github.com/orgs/" + orgName + "/repos?page=" + page + "&per_page=" + perPage;
+            Request reposRequest = new Request.Builder()
+                    .url(reposApiUrl)
+                    .header("Authorization", "Bearer " + accessToken)
+                    .build();
+
+            try {
+                Response reposResponse = client.newCall(reposRequest).execute();
+                String reposResponseBody = reposResponse.body().string();
+
+                if (reposResponseBody.isEmpty()) {
+                    break; // No more repositories
+                }
+
+                JsonArray repos = JsonParser.parseString(reposResponseBody).getAsJsonArray();
+
+                for (int i = 0; i < repos.size(); i++) {
+                    allRepos.add(repos.get(i).getAsJsonObject());
+                }
+                page++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+
+        return allRepos;
+    }
+
+    // Fetch all branches for a repository with pagination
+    private static List<JsonObject> fetchAllBranches(OkHttpClient client, String accessToken, String orgName, String repoName) {
+        List<JsonObject> allBranches = new ArrayList<>();
+        int page = 1;
+        int perPage = 100; // Maximum items per page
+
+        while (true) {
+            String branchesApiUrl = "https://api.github.com/repos/" + orgName + "/" + repoName + "/branches?page=" + page + "&per_page=" + perPage;
+            Request branchesRequest = new Request.Builder()
+                    .url(branchesApiUrl)
+                    .header("Authorization", "Bearer " + accessToken)
+                    .build();
+
+            try {
+                Response branchesResponse = client.newCall(branchesRequest).execute();
+                String branchesResponseBody = branchesResponse.body().string();
+
+                if (branchesResponseBody.isEmpty()) {
+                    break; // No more branches
+                }
+
+                JsonArray branches = JsonParser.parseString(branchesResponseBody).getAsJsonArray();
+
+                for (int i = 0; i < branches.size(); i++) {
+                    allBranches.add(branches.get(i).getAsJsonObject());
+                }
+                page++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+
+        return allBranches;
+    }
+
+    // Fetch all commits for a branch within a date range with pagination
+    private static List<JsonObject> fetchAllCommits(OkHttpClient client, String accessToken, String orgName, String repoName, String branchName, Date startDate, Date endDate) {
+        List<JsonObject> allCommits = new ArrayList();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        int page = 1;
+        int perPage = 100; // Maximum items per page
+
+        while (true) {
+            String commitsApiUrl = "https://api.github.com/repos/" + orgName + "/" + repoName + "/commits?sha=" + branchName +
+                    "&since=" + dateFormat.format(startDate) + "&until=" + dateFormat.format(endDate) + "&page=" + page + "&per_page=" + perPage;
+            Request commitsRequest = new Request.Builder()
+                    .url(commitsApiUrl)
+                    .header("Authorization", "Bearer " + accessToken)
+                    .build();
+
+            try {
+                Response commitsResponse = client.newCall(commitsRequest).execute();
+                String commitsResponseBody = commitsResponse.body().string();
+
+                if (commitsResponseBody.isEmpty()) {
+                    break; // No more commits
+                }
+
+                JsonArray commits = JsonParser.parseString(commitsResponseBody).getAsJsonArray();
+
+                for (int i = 0; i < commits.size(); i++) {
+                    allCommits.add(commits.get(i).getAsJsonObject());
+                }
+                page++;
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
+            }
+        }
+
+        return allCommits;
+    }
+}
