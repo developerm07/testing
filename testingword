@@ -197,3 +197,139 @@ public class GitHubCommitCounterWithPaginationAndSafety {
         return allCommits;
     }
 }
+==========================================
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class GitHubCommitCounterWithRateLimit {
+    public static void main(String[] args) {
+        String accessToken = "YOUR_ACCESS_TOKEN";
+        List<String> developerUsernames = List.of("DEVELOPER_USERNAME1", "DEVELOPER_USERNAME2");
+        String startDateStr = "YYYY-MM-DDT00:00:00Z";
+        String endDateStr = "YYYY-MM-DDT23:59:59Z";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        Date startDate = dateFormat.parse(startDateStr);
+        Date endDate = dateFormat.parse(endDateStr);
+
+        OkHttpClient client = new OkHttpClient();
+
+        Map<String, Map<String, Integer>> developerCommitData = new HashMap<>();
+
+        for (String developerUsername : developerUsernames) {
+            Map<String, Integer> commitData = new HashMap<>();
+
+            try {
+                // Check rate limits before making the API request
+                checkRateLimit(client, accessToken);
+
+                // Step 1: Retrieve organizations of the developer
+                String orgsApiUrl = "https://api.github.com/users/" + developerUsername + "/orgs";
+                Request orgsRequest = new Request.Builder()
+                    .url(orgsApiUrl)
+                    .header("Authorization", "Bearer " + accessToken)
+                    .build();
+
+                Response orgsResponse = client.newCall(orgsRequest).execute();
+                String orgsResponseBody = orgsResponse.body().string();
+                JsonArray orgs = JsonParser.parseString(orgsResponseBody).getAsJsonArray();
+
+                // Add your code to fetch repositories with pagination here
+                List<JsonObject> allRepos = fetchAllRepositories(client, developerUsername, accessToken);
+
+                // Add your code to fetch branches with pagination here
+                List<CompletableFuture<Void>> branchTasks = new ArrayList<>();
+                for (JsonObject repo : allRepos) {
+                    String repoName = repo.get("name").getAsString();
+                    CompletableFuture<Void> branchTask = CompletableFuture.runAsync(() -> {
+                        List<JsonObject> allBranches = fetchAllBranches(client, developerUsername, accessToken, repoName);
+                        // Process branches
+                    });
+                    branchTasks.add(branchTask);
+                }
+                CompletableFuture<Void> allBranchesTask = CompletableFuture.allOf(branchTasks.toArray(new CompletableFuture[0]));
+                allBranchesTask.get();  // Wait for all branch tasks to complete
+
+                // Add your code to fetch commits with pagination here
+                List<CompletableFuture<Void>> commitTasks = new ArrayList<>();
+                for (JsonObject repo : allRepos) {
+                    String repoName = repo.get("name").getAsString();
+                    CompletableFuture<Void> commitTask = CompletableFuture.runAsync(() -> {
+                        List<JsonObject> allCommits = fetchAllCommits(client, developerUsername, accessToken, repoName, startDate, endDate);
+                        // Process commits
+                    });
+                    commitTasks.add(commitTask);
+                }
+                CompletableFuture<Void> allCommitsTask = CompletableFuture.allOf(commitTasks.toArray(new CompletableFuture[0]));
+                allCommitsTask.get();  // Wait for all commit tasks to complete
+
+                developerCommitData.put(developerUsername, commitData);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (Map.Entry<String, Map<String, Integer>> entry : developerCommitData.entrySet()) {
+            String developerUsername = entry.getKey();
+            Map<String, Integer> commitData = entry.getValue();
+
+            int totalCommits = commitData.values().stream().mapToInt(Integer::intValue).sum();
+
+            System.out.println("Developer: " + developerUsername);
+            System.out.println("Total commits: " + totalCommits);
+
+            commitData.forEach((branch, commitCount) -> {
+                System.out.println("Branch: " + branch + " Commits: " + commitCount);
+            });
+        }
+    }
+
+    // Define the fetchAllRepositories method
+
+    // Define the fetchAllBranches method
+
+    // Define the fetchAllCommits method
+
+    private static void checkRateLimit(OkHttpClient client, String accessToken) throws Exception {
+        String rateLimitApiUrl = "https://api.github.com/rate_limit";
+        Request rateLimitRequest = new Request.Builder()
+            .url(rateLimitApiUrl)
+            .header("Authorization", "Bearer " + accessToken)
+            .build();
+
+        Response rateLimitResponse = client.newCall(rateLimitRequest).execute();
+        String rateLimitResponseBody = rateLimitResponse.body().string();
+
+        JsonObject rateLimitData = JsonParser.parseString(rateLimitResponseBody).getAsJsonObject();
+        int remainingRequests = rateLimitData.getAsJsonObject("rate").get("remaining").getAsInt();
+
+        if (remainingRequests < 10) {
+            int resetTimeInSeconds = rateLimitData.getAsJsonObject("rate").get("reset").getAsInt();
+            int currentTimeInSeconds = (int) (System.currentTimeMillis() / 1000);
+
+            if (resetTimeInSeconds > currentTimeInSeconds) {
+                int waitTimeInSeconds = resetTimeInSeconds - currentTimeInSeconds;
+                System.out.println("Rate limit exceeded. Waiting for " + waitTimeInSeconds + " seconds.");
+                Thread.sleep(waitTimeInSeconds * 1000);
+            }
+        }
+    }
+
+    // Continue with the rest of your code
+
+    // Define the fetchAllRepositories method
+
+    // Define the fetchAllBranches method
+
+    // Define the fetchAllCommits method
+}
