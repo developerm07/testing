@@ -1,56 +1,75 @@
-templates:
-  - id: 1
-    mappings:
-      - from: person.contacts.phone.home
-        to: company.employees.contact_info.phone.cell
-      - from: person.name
-        to: company.employees.name
-  - id: 2
-    mappings:
-      - from: person.address.city
-        to: company.employees.department.location
-      - from: person.address.state
-        to: company.employees.department.state
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
-ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-JsonNode mappings = mapper.readTree(new File("mappings.yaml"));
+public class ObjectMapperExample {
+    public static void main(String[] args) {
+        ObjectMapper objectMapper = new ObjectMapper();
 
-int templateId = 1;
-for (JsonNode template : mappings.get("templates")) {
-    if (template.get("id").asInt() == templateId) {
-        for (JsonNode mapping : template.get("mappings")) {
-            String from = mapping.get("from").asText();
-            String to = mapping.get("to").asText();
+        // Sample JSON string for Object1 (with data)
+        String jsonString1 = "{\n" +
+                "  \"eventName\": \"EventABC\",\n" +
+                "  \"customers\": [\n" +
+                "    { \"name\": \"Customer1\", \"id\": \"1\" },\n" +
+                "    { \"name\": \"Customer2\", \"id\": \"2\" }\n" +
+                "  ]\n" +
+                "}";
 
-            // Apply the mapping to the JSON object
+        // Sample JSON string for Object2 (initialized with null values and size 1)
+        String jsonString2 = "{\n" +
+                "  \"eventId\": null,\n" +
+                "  \"persons\": [null]\n" +
+                "}";
+
+        try {
+            // Parse JSON strings into JsonNode
+            JsonNode jsonNode1 = objectMapper.readTree(jsonString1);
+            JsonNode jsonNode2 = objectMapper.readTree(jsonString2);
+
+            // Define a mapping between fields in Object1 and Object2
+            // Here we are mapping Object1/eventName -> Object2/eventId
+            // and Object1/customers/name -> Object2/persons/name
+            Map<String, String> fieldMapping = new HashMap<>();
+            fieldMapping.put("eventName", "eventId");
+            fieldMapping.put("customers.name", "persons.name");
+            fieldMapping.put("customers.id", "persons.id");
+
+            // Iterate through the mapping and copy data
+            for (Map.Entry<String, String> entry : fieldMapping.entrySet()) {
+                String sourceField = entry.getKey();
+                String targetField = entry.getValue();
+
+                // Get the source value
+                JsonNode sourceValue = jsonNode1.at(sourceField);
+
+                // Get the target node
+                JsonNode targetNode = jsonNode2.at(targetField);
+
+                // Copy the data
+                if (sourceValue.isArray() && targetNode.isArray()) {
+                    // If both are arrays, handle the array elements
+                    copyArrayData((ArrayNode) sourceValue, (ArrayNode) targetNode);
+                } else {
+                    // Otherwise, copy the value
+                    ((ObjectNode) jsonNode2).set(targetField, sourceValue.isNull()
+                            ? objectMapper.nullNode()
+                            : sourceValue.deepCopy());
+                }
+            }
+
+            // Updated jsonNode2 now contains the copied data
+            String updatedJsonString2 = objectMapper.writeValueAsString(jsonNode2);
+            System.out.println(updatedJsonString2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-}
-public static void main(String[] args) throws IOException {
-    ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-    String yaml = "mappings:\n  - from: person.contacts.phone.home\n    to: company.employees.contact_info.phone.cell\n";
-    String json1 = "{\"person\": {\"contacts\": {\"phone\": {\"home\": \"555-1234\"}}}}";
-    String json2 = "{\"company\": {\"employees\": [{\"contact_info\": {\"phone\": {\"cell\": \"555-1111\"}}},{\"contact_info\": {\"phone\": {\"cell\": \"555-3333\"}}}]}}";
 
-    JsonNode node1 = mapper.readTree(yaml);
-    JsonNode node2 = mapper.readTree(json2);
-
-    for (JsonNode mapping : node1.get("mappings")) {
-        String[] from = mapping.get("from").asText().split("\\.");
-        String[] to = mapping.get("to").asText().split("\\.");
-
-        JsonNode value1 = mapper.readTree(json1);
-        JsonNode value2 = node2;
-        for (int i = 0; i < from.length - 1; i++) {
-            value1 = value1.get(from[i]);
-            value2 = value2.get(to[i]);
-        }
-
-        JsonNode sourceValue = value1.get(from[from.length - 1]);
-        if (sourceValue != null) {
-            ((ObjectNode) value2.get(to[to.length - 2]).get(to[to.length - 1])).put(to[to.length - 1], sourceValue.asText());
+    private static void copyArrayData(ArrayNode sourceArray, ArrayNode targetArray) {
+        targetArray.removeAll();
+        for (JsonNode element : sourceArray) {
+            targetArray.add(element.deepCopy());
         }
     }
-
-    System.out.println(node2);
 }
