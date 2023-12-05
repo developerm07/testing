@@ -1,75 +1,83 @@
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class ObjectMapperExample {
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class DynamicJsonTransformer {
+
     public static void main(String[] args) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // Sample JSON string for Object1 (with data)
-        String jsonString1 = "{\n" +
-                "  \"eventName\": \"EventABC\",\n" +
-                "  \"customers\": [\n" +
-                "    { \"name\": \"Customer1\", \"id\": \"1\" },\n" +
-                "    { \"name\": \"Customer2\", \"id\": \"2\" }\n" +
-                "  ]\n" +
-                "}";
-
-        // Sample JSON string for Object2 (initialized with null values and size 1)
-        String jsonString2 = "{\n" +
-                "  \"eventId\": null,\n" +
-                "  \"persons\": [null]\n" +
-                "}";
+        String jsonString = "{\"event\":{\"persons\":[{\"personname\":\"John\",\"details\":{\"age\":25,\"address\":{\"city\":\"New York\",\"zipcode\":\"10001\"}}},{\"personname\":\"Jane\",\"details\":{\"age\":30,\"address\":{\"city\":\"Los Angeles\",\"zipcode\":\"90001\"}}}]}}";
 
         try {
-            // Parse JSON strings into JsonNode
-            JsonNode jsonNode1 = objectMapper.readTree(jsonString1);
-            JsonNode jsonNode2 = objectMapper.readTree(jsonString2);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode root = objectMapper.readTree(jsonString);
 
-            // Define a mapping between fields in Object1 and Object2
-            // Here we are mapping Object1/eventName -> Object2/eventId
-            // and Object1/customers/name -> Object2/persons/name
-            Map<String, String> fieldMapping = new HashMap<>();
-            fieldMapping.put("eventName", "eventId");
-            fieldMapping.put("customers.name", "persons.name");
-            fieldMapping.put("customers.id", "persons.id");
+            // Define your mapping configuration
+            Map<String, String> mapping = new HashMap<>();
+            mapping.put("/event/persons/personname", "/emp/employees/emplname");
+            mapping.put("/event/persons/details/age", "/emp/employees/info/years");
+            mapping.put("/event/persons/details/address/city", "/emp/employees/info/location/city");
+            mapping.put("/event/persons/details/address/zipcode", "/emp/employees/info/location/code");
 
-            // Iterate through the mapping and copy data
-            for (Map.Entry<String, String> entry : fieldMapping.entrySet()) {
-                String sourceField = entry.getKey();
-                String targetField = entry.getValue();
+            // Transform the input JSON using the dynamic mapping
+            JsonNode outputNode = transformJson(root, mapping, objectMapper);
 
-                // Get the source value
-                JsonNode sourceValue = jsonNode1.at(sourceField);
+            // Convert the output to a JSON string
+            String outputJson = objectMapper.writeValueAsString(outputNode);
 
-                // Get the target node
-                JsonNode targetNode = jsonNode2.at(targetField);
+            // Print the result
+            System.out.println(outputJson);
 
-                // Copy the data
-                if (sourceValue.isArray() && targetNode.isArray()) {
-                    // If both are arrays, handle the array elements
-                    copyArrayData((ArrayNode) sourceValue, (ArrayNode) targetNode);
-                } else {
-                    // Otherwise, copy the value
-                    ((ObjectNode) jsonNode2).set(targetField, sourceValue.isNull()
-                            ? objectMapper.nullNode()
-                            : sourceValue.deepCopy());
-                }
-            }
-
-            // Updated jsonNode2 now contains the copied data
-            String updatedJsonString2 = objectMapper.writeValueAsString(jsonNode2);
-            System.out.println(updatedJsonString2);
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void copyArrayData(ArrayNode sourceArray, ArrayNode targetArray) {
-        targetArray.removeAll();
-        for (JsonNode element : sourceArray) {
-            targetArray.add(element.deepCopy());
+    private static JsonNode transformJson(JsonNode inputNode, Map<String, String> mapping, ObjectMapper objectMapper) {
+        if (inputNode.isObject()) {
+            ObjectNode outputNode = objectMapper.createObjectNode();
+
+            // Iterate through fields in the input node
+            inputNode.fields().forEachRemaining(entry -> {
+                String fieldName = entry.getKey();
+                JsonNode fieldValue = entry.getValue();
+
+                // Apply dynamic mapping
+                String outputFieldPath = mapping.get(getJsonPath(entry));
+                if (outputFieldPath != null) {
+                    ((ObjectNode) outputNode).set(outputFieldPath, transformJson(fieldValue, mapping, objectMapper));
+                } else {
+                    ((ObjectNode) outputNode).set(fieldName, transformJson(fieldValue, mapping, objectMapper));
+                }
+            });
+
+            return outputNode;
+        } else if (inputNode.isArray()) {
+            ArrayNode outputArray = objectMapper.createArrayNode();
+
+            // Iterate through elements in the input array
+            inputNode.elements().forEachRemaining(element -> outputArray.add(transformJson(element, mapping, objectMapper)));
+
+            return outputArray;
+        } else {
+            // For simple values, return the value as is
+            return inputNode;
         }
+    }
+
+    private static String getJsonPath(Map.Entry<String, JsonNode> entry) {
+        // Helper method to get the JSON path of a given entry
+        String path = entry.getKey();
+        Iterator<Map.Entry<String, JsonNode>> parents = entry.getParent().fields();
+        while (parents.hasNext()) {
+            Map.Entry<String, JsonNode> parent = parents.next();
+            path = parent.getKey() + "/" + path;
+        }
+        return "/" + path;
     }
 }
