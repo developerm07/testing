@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active:
+    - chaos-monkey
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect  
+chaos:
+  monkey:
+    enabled: true
+    watcher:
+      rest-controller: false
+      repository: false
+      service: true
+    assaults:
+      exceptions-active: true
+    
+        
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - chaosmonkey          
+#  endpoint:
+#    chaosmonkey:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: 
+#          - chaosmonkey
+#          - health
+              
+  
+      
