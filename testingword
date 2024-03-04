@@ -81,3 +81,12 @@ public class DynamicJsonTransformer {
         return "/" + path;
     }
 }
+
+
+//[/actuator/chaosmonkey],methods=[GET]
+//[/actuator/chaosmonkey/watcher],methods=[GET]
+//[/actuator/chaosmonkey/assaults],methods=[GET]
+//[/actuator/chaosmonkey/enable],methods=[POST]
+//[/actuator/chaosmonkey/disable],methods=[POST]
+//[/actuator/chaosmonkey/status],methods=[GET]
+//[/actuator/chaosmonkey/assaults],methods=[POST]
