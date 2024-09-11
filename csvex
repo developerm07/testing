@@ -1,0 +1,102 @@
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+
+public class XlsxWriterService {
+
+    public void writeXlsx(List<ApplicationData> applicationDataList) throws IOException {
+        String filePath = "observability_report.xlsx";
+
+        // Create a new workbook and sheet
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Observability Report");
+
+        // Create a thick border style for pillars
+        XSSFCellStyle thickBorderStyle = workbook.createCellStyle();
+        thickBorderStyle.setBorderBottom(BorderStyle.THICK);
+        thickBorderStyle.setBorderTop(BorderStyle.THICK);
+        thickBorderStyle.setBorderRight(BorderStyle.THICK);
+        thickBorderStyle.setBorderLeft(BorderStyle.THICK);
+        thickBorderStyle.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
+        thickBorderStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // Create style for questions
+        XSSFCellStyle questionStyle = workbook.createCellStyle();
+        questionStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
+        questionStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        // First row: Pillars
+        Row pillarRow = sheet.createRow(0);
+        createPillarRow(applicationDataList, pillarRow, thickBorderStyle);
+
+        // Second row: Questions
+        Row questionRow = sheet.createRow(1);
+        createQuestionRow(applicationDataList, questionRow, questionStyle);
+
+        // Dynamic data rows
+        int rowIndex = 2;
+        for (ApplicationData appData : applicationDataList) {
+            Row dataRow = sheet.createRow(rowIndex++);
+            createDataRow(appData, dataRow);
+        }
+
+        // Adjust the width of each column
+        adjustColumnWidths(sheet, applicationDataList);
+
+        // Write the workbook to the file
+        FileOutputStream fileOut = new FileOutputStream(filePath);
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+    }
+
+    private void createPillarRow(List<ApplicationData> applicationDataList, Row pillarRow, CellStyle pillarStyle) {
+        int colIndex = 0;
+        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
+            Cell cell = pillarRow.createCell(colIndex);
+            cell.setCellValue(pillarData.getPillar());
+            cell.setCellStyle(pillarStyle);
+
+            // Merge the cells for each pillar's questions
+            int questionCount = pillarData.getQuestions().size();
+            pillarRow.getSheet().addMergedRegion(new CellRangeAddress(0, 0, colIndex, colIndex + questionCount - 1));
+
+            colIndex += questionCount;
+        }
+    }
+
+    private void createQuestionRow(List<ApplicationData> applicationDataList, Row questionRow, CellStyle questionStyle) {
+        int colIndex = 0;
+        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
+            for (String question : pillarData.getQuestions()) {
+                Cell cell = questionRow.createCell(colIndex++);
+                cell.setCellValue(question);
+                cell.setCellStyle(questionStyle);
+            }
+        }
+    }
+
+    private void createDataRow(ApplicationData appData, Row dataRow) {
+        int colIndex = 0;
+        for (ObservabilityData pillarData : appData.getObservabilityData()) {
+            for (String answer : pillarData.getAnswers()) {
+                Cell cell = dataRow.createCell(colIndex++);
+                cell.setCellValue(answer);
+            }
+        }
+    }
+
+    private void adjustColumnWidths(Sheet sheet, List<ApplicationData> applicationDataList) {
+        // Adjust the column width based on the number of questions for each pillar
+        int colIndex = 0;
+        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
+            for (int i = 0; i < pillarData.getQuestions().size(); i++) {
+                sheet.setColumnWidth(colIndex++, 4000);  // Adjust as needed
+            }
+        }
+    }
+}
