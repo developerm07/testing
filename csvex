@@ -1,102 +1,75 @@
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
-public class XlsxWriterService {
+public class ExcelCreator {
 
-    public void writeXlsx(List<ApplicationData> applicationDataList) throws IOException {
-        String filePath = "observability_report.xlsx";
+    public static void main(String[] args) throws IOException {
 
         // Create a new workbook and sheet
         XSSFWorkbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Observability Report");
+        XSSFSheet sheet = workbook.createSheet("Design");
 
-        // Create a thick border style for pillars
-        XSSFCellStyle thickBorderStyle = workbook.createCellStyle();
+        // Create a bold font for headers
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        
+        // Create a cell style for headers with thick borders
+        CellStyle thickBorderStyle = workbook.createCellStyle();
+        thickBorderStyle.setFont(headerFont);
         thickBorderStyle.setBorderBottom(BorderStyle.THICK);
         thickBorderStyle.setBorderTop(BorderStyle.THICK);
-        thickBorderStyle.setBorderRight(BorderStyle.THICK);
         thickBorderStyle.setBorderLeft(BorderStyle.THICK);
-        thickBorderStyle.setFillForegroundColor(IndexedColors.LIGHT_YELLOW.getIndex());
-        thickBorderStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        thickBorderStyle.setBorderRight(BorderStyle.THICK);
 
-        // Create style for questions
-        XSSFCellStyle questionStyle = workbook.createCellStyle();
-        questionStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
-        questionStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        // Create a cell style with thick right border only (to separate sections)
+        CellStyle thickRightBorderStyle = workbook.createCellStyle();
+        thickRightBorderStyle.setBorderRight(BorderStyle.THICK);
 
-        // First row: Pillars
-        Row pillarRow = sheet.createRow(0);
-        createPillarRow(applicationDataList, pillarRow, thickBorderStyle);
-
-        // Second row: Questions
-        Row questionRow = sheet.createRow(1);
-        createQuestionRow(applicationDataList, questionRow, questionStyle);
-
-        // Dynamic data rows
-        int rowIndex = 2;
-        for (ApplicationData appData : applicationDataList) {
-            Row dataRow = sheet.createRow(rowIndex++);
-            createDataRow(appData, dataRow);
+        // Create the first row (Header) and the columns "Pillar", "APM", "APPLOG"
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {"Pillar", "APM", "APPLOG"};
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(thickBorderStyle);
         }
 
-        // Adjust the width of each column
-        adjustColumnWidths(sheet, applicationDataList);
+        // Create the second row (Subheaders for Questionnaire)
+        Row subHeaderRow = sheet.createRow(1);
+        String[] subHeaders = {"APPID", "Q1", "Q2", "Q3", "Q1", "Q2"};
+        for (int i = 0; i < subHeaders.length; i++) {
+            Cell cell = subHeaderRow.createCell(i);
+            cell.setCellValue(subHeaders[i]);
 
-        // Write the workbook to the file
-        FileOutputStream fileOut = new FileOutputStream(filePath);
-        workbook.write(fileOut);
-        fileOut.close();
+            // Apply thick border at specific columns for APM and APPLOG
+            if (i == 3 || i == 5) { // After APM Q3 (index 3) and after APPLOG Q2 (index 5)
+                cell.setCellStyle(thickRightBorderStyle); // Apply thick right border
+            } else {
+                cell.setCellStyle(thickBorderStyle);
+            }
+        }
+
+        // Merge cells for the "Pillar" and sections for APM and APPLOG
+        sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, 0)); // Pillar
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 1, 3)); // APM
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 4, 5)); // APPLOG
+
+        // Resize columns
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // Write the output to a file
+        try (FileOutputStream fileOut = new FileOutputStream("Design.xlsx")) {
+            workbook.write(fileOut);
+        }
+
         workbook.close();
-    }
-
-    private void createPillarRow(List<ApplicationData> applicationDataList, Row pillarRow, CellStyle pillarStyle) {
-        int colIndex = 0;
-        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
-            Cell cell = pillarRow.createCell(colIndex);
-            cell.setCellValue(pillarData.getPillar());
-            cell.setCellStyle(pillarStyle);
-
-            // Merge the cells for each pillar's questions
-            int questionCount = pillarData.getQuestions().size();
-            pillarRow.getSheet().addMergedRegion(new CellRangeAddress(0, 0, colIndex, colIndex + questionCount - 1));
-
-            colIndex += questionCount;
-        }
-    }
-
-    private void createQuestionRow(List<ApplicationData> applicationDataList, Row questionRow, CellStyle questionStyle) {
-        int colIndex = 0;
-        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
-            for (String question : pillarData.getQuestions()) {
-                Cell cell = questionRow.createCell(colIndex++);
-                cell.setCellValue(question);
-                cell.setCellStyle(questionStyle);
-            }
-        }
-    }
-
-    private void createDataRow(ApplicationData appData, Row dataRow) {
-        int colIndex = 0;
-        for (ObservabilityData pillarData : appData.getObservabilityData()) {
-            for (String answer : pillarData.getAnswers()) {
-                Cell cell = dataRow.createCell(colIndex++);
-                cell.setCellValue(answer);
-            }
-        }
-    }
-
-    private void adjustColumnWidths(Sheet sheet, List<ApplicationData> applicationDataList) {
-        // Adjust the column width based on the number of questions for each pillar
-        int colIndex = 0;
-        for (ObservabilityData pillarData : applicationDataList.get(0).getObservabilityData()) {
-            for (int i = 0; i < pillarData.getQuestions().size(); i++) {
-                sheet.setColumnWidth(colIndex++, 4000);  // Adjust as needed
-            }
-        }
+        System.out.println("Excel file created successfully!");
     }
 }
