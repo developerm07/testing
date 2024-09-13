@@ -30,14 +30,23 @@ public class ExcelCreator {
         CellStyle thickRightBorderStyle = workbook.createCellStyle();
         thickRightBorderStyle.setBorderRight(BorderStyle.THICK);
 
-        // Create the first row (Header) and the columns "Pillar", "APM", "APPLOG"
+        // Create the first row (Header) and merge cells for Pillar
         Row headerRow = sheet.createRow(0);
-        String[] headers = {"Pillar", "APM", "APPLOG"};
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers[i]);
-            cell.setCellStyle(thickBorderStyle);
-        }
+        Cell pillarCell = headerRow.createCell(0);
+        pillarCell.setCellValue("Pillar");
+        pillarCell.setCellStyle(thickBorderStyle);
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2)); // Merge Pillar across 3 columns
+
+        // Add APM and APPLOG headers to the first row
+        Cell apmCell = headerRow.createCell(3);
+        apmCell.setCellValue("APM");
+        apmCell.setCellStyle(thickBorderStyle);
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 3, 5)); // Merge APM across 3 columns
+
+        Cell appLogCell = headerRow.createCell(6);
+        appLogCell.setCellValue("APPLOG");
+        appLogCell.setCellStyle(thickBorderStyle);
+        sheet.addMergedRegion(new CellRangeAddress(0, 0, 6, 7)); // Merge APPLOG across 2 columns
 
         // Create the second row (Subheaders for Questionnaire)
         Row subHeaderRow = sheet.createRow(1);
@@ -47,20 +56,18 @@ public class ExcelCreator {
             cell.setCellValue(subHeaders[i]);
 
             // Apply thick border at specific columns for APM and APPLOG
-            if (i == 3 || i == 5) { // After APM Q3 (index 3) and after APPLOG Q2 (index 5)
+            if (i == 2 || i == 5 || i == 7) { // After Pillar, APM Q3 (index 5), and APPLOG Q2 (index 7)
                 cell.setCellStyle(thickRightBorderStyle); // Apply thick right border
             } else {
                 cell.setCellStyle(thickBorderStyle);
             }
         }
 
-        // Merge cells for the "Pillar" and sections for APM and APPLOG
-        sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, 0)); // Pillar
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 1, 3)); // APM
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 4, 5)); // APPLOG
+        // Merge cells for APPID column under Pillar
+        sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 2)); // Merge APPID across 3 columns under Pillar
 
         // Resize columns
-        for (int i = 0; i < headers.length; i++) {
+        for (int i = 0; i < 8; i++) {
             sheet.autoSizeColumn(i);
         }
 
