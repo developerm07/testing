@@ -1,82 +1,101 @@
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.util.CellRangeAddress;
 
+import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ExcelCreator {
+public class ExcelStylingExample {
 
     public static void main(String[] args) throws IOException {
 
-        // Create a new workbook and sheet
         XSSFWorkbook workbook = new XSSFWorkbook();
-        XSSFSheet sheet = workbook.createSheet("Design");
+        XSSFSheet sheet = workbook.createSheet("Styled Sheet");
 
-        // Create a bold font for headers
-        Font headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        
-        // Create a cell style for headers with thick borders
-        CellStyle thickBorderStyle = workbook.createCellStyle();
-        thickBorderStyle.setFont(headerFont);
-        thickBorderStyle.setBorderBottom(BorderStyle.THICK);
-        thickBorderStyle.setBorderTop(BorderStyle.THICK);
-        thickBorderStyle.setBorderLeft(BorderStyle.THICK);
-        thickBorderStyle.setBorderRight(BorderStyle.THICK);
+        // Create row and cell
+        Row row0 = sheet.createRow(0);
+        Row row1 = sheet.createRow(1);
 
-        // Create a cell style with thick right border only (to separate sections)
-        CellStyle thickRightBorderStyle = workbook.createCellStyle();
-        thickRightBorderStyle.setBorderRight(BorderStyle.THICK);
+        // Define the styles for headers
+        XSSFCellStyle greenStyle = createHeaderStyle(workbook, Color.GREEN);
+        XSSFCellStyle pinkStyle = createHeaderStyle(workbook, Color.PINK);
+        XSSFCellStyle orangeStyle = createHeaderStyle(workbook, Color.ORANGE);
+        XSSFCellStyle thickBlueBorderStyle = createThickBlueBorderStyle(workbook);
 
-        // Create the first row (Header) and merge cells for Pillar
-        Row headerRow = sheet.createRow(0);
-        Cell pillarCell = headerRow.createCell(0);
+        // Pillar spans 2 rows and 2 columns
+        sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, 1));
+        Cell pillarCell = row0.createCell(0);
         pillarCell.setCellValue("Pillar");
-        pillarCell.setCellStyle(thickBorderStyle);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 2)); // Merge Pillar across 3 columns
+        pillarCell.setCellStyle(greenStyle);
 
-        // Add APM and APPLOG headers to the first row
-        Cell apmCell = headerRow.createCell(3);
+        // APM spans 2 rows and 3 columns
+        sheet.addMergedRegion(new CellRangeAddress(0, 1, 2, 4));
+        Cell apmCell = row0.createCell(2);
         apmCell.setCellValue("APM");
-        apmCell.setCellStyle(thickBorderStyle);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 3, 5)); // Merge APM across 3 columns
+        apmCell.setCellStyle(pinkStyle);
 
-        Cell appLogCell = headerRow.createCell(6);
+        // APPLOG spans 2 rows and 3 columns
+        sheet.addMergedRegion(new CellRangeAddress(0, 1, 5, 7));
+        Cell appLogCell = row0.createCell(5);
         appLogCell.setCellValue("APPLOG");
-        appLogCell.setCellStyle(thickBorderStyle);
-        sheet.addMergedRegion(new CellRangeAddress(0, 0, 6, 7)); // Merge APPLOG across 2 columns
+        appLogCell.setCellStyle(orangeStyle);
 
-        // Create the second row (Subheaders for Questionnaire)
-        Row subHeaderRow = sheet.createRow(1);
-        String[] subHeaders = {"APPID", "Q1", "Q2", "Q3", "Q1", "Q2"};
-        for (int i = 0; i < subHeaders.length; i++) {
-            Cell cell = subHeaderRow.createCell(i);
-            cell.setCellValue(subHeaders[i]);
+        // Apply thick blue borders only after specific columns
+        applySelectiveBlueBorders(sheet, thickBlueBorderStyle);
 
-            // Apply thick border at specific columns for APM and APPLOG
-            if (i == 2 || i == 5 || i == 7) { // After Pillar, APM Q3 (index 5), and APPLOG Q2 (index 7)
-                cell.setCellStyle(thickRightBorderStyle); // Apply thick right border
-            } else {
-                cell.setCellStyle(thickBorderStyle);
-            }
-        }
-
-        // Merge cells for APPID column under Pillar
-        sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 2)); // Merge APPID across 3 columns under Pillar
-
-        // Resize columns
-        for (int i = 0; i < 8; i++) {
-            sheet.autoSizeColumn(i);
-        }
-
-        // Write the output to a file
-        try (FileOutputStream fileOut = new FileOutputStream("Design.xlsx")) {
+        // Write output to file
+        try (FileOutputStream fileOut = new FileOutputStream("styled_output.xlsx")) {
             workbook.write(fileOut);
         }
-
         workbook.close();
-        System.out.println("Excel file created successfully!");
+    }
+
+    // Create header style with background color
+    private static XSSFCellStyle createHeaderStyle(XSSFWorkbook workbook, Color color) {
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setFillForegroundColor(new XSSFColor(color, null));
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        return style;
+    }
+
+    // Create thick blue border style
+    private static XSSFCellStyle createThickBlueBorderStyle(XSSFWorkbook workbook) {
+        XSSFCellStyle style = workbook.createCellStyle();
+        style.setBorderRight(BorderStyle.THICK);
+        style.setRightBorderColor(IndexedColors.BLUE.getIndex());
+        return style;
+    }
+
+    // Apply selective thick blue borders after specific sections
+    private static void applySelectiveBlueBorders(Sheet sheet, CellStyle thickBlueBorderStyle) {
+        int[][] borderPositions = {
+                {0, 1}, // After Pillar (column 1)
+                {4, 4}, // After APM (column 4)
+                {7, 7}  // After APPLOG (column 7)
+        };
+
+        for (int[] position : borderPositions) {
+            applyBlueBorder(sheet, 0, 1, position[0], position[1], thickBlueBorderStyle);
+        }
+    }
+
+    // Apply blue border to a merged region
+    private static void applyBlueBorder(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol, CellStyle borderStyle) {
+        for (int row = firstRow; row <= lastRow; row++) {
+            Row currentRow = sheet.getRow(row);
+            for (int col = firstCol; col <= lastCol; col++) {
+                Cell cell = currentRow.getCell(col);
+                if (cell == null) {
+                    cell = currentRow.createCell(col);
+                }
+                cell.setCellStyle(borderStyle);
+            }
+        }
     }
 }
