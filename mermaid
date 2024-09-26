@@ -1,0 +1,84 @@
+//Integration flow
+graph TD
+    main(main/master) -->|after deployment| develop(develop)
+    main -->|prod issue fixes| hotfix(hotfix)
+    develop -->|cut release branch once feature is ready for UAT| release(release)
+    release --> main
+    release -->|UAT issue fixes| feature(Feature Branch)
+    develop <-->|it is the next up coming release for a feature| integ1(integration 1)
+    develop <--> integ2(integration 2)
+    integ1 <--> f1(feature/feature1)
+    integ1 <--> f2(feature/featureN)
+    integ2 <--> f3(feature/feature1)
+    integ2 <--> f4(feature/featureN)
+    
+    %% Positioning
+    subgraph Main Branch
+        main
+        hotfix
+    end
+    
+    subgraph Integration branches
+        develop
+        integ1
+        integ2
+    end
+    
+    subgraph Release Branches
+        release
+        feature
+    end
+    
+    %% Layout adjustments
+    style main fill:#f9f,stroke:#333,stroke-width:4px
+    style develop fill:#bbf,stroke:#333,stroke-width:4px
+    style release fill:#bfb,stroke:#333,stroke-width:4px
+    style hotfix fill:#ffb,stroke:#333,stroke-width:4px
+    style feature fill:#fbf,stroke:#333,stroke-width:4px
+    style integ1 fill:#fbb,stroke:#333,stroke-width:4px
+    style integ2 fill:#bff,stroke:#333,stroke-width:4px
+    style f1 fill:#ffb,stroke:#333,stroke-width:4px
+    style f2 fill:#ffb,stroke:#333,stroke-width:4px
+    style f3 fill:#ffb,stroke:#333,stroke-width:4px
+    style f4 fill:#ffb,stroke:#333,stroke-width:4px
+==========================================================
+
+Git flow
+graph TD
+    main(main/master) -->|after deployment| develop(develop)
+    main -->|prod issue fixes| hotfix(hotfix)
+    develop -->|cut release branch once feature is ready for UAT| release(release)
+    release --> main
+    release -->|UAT issue fixes| feature(Feature Branch)
+    develop --> f1(feature/feature1)
+    develop --> f2(feature/featureN)
+    
+    %% Positioning
+    subgraph Main Branches
+        main
+        hotfix
+    end
+    
+    subgraph Development Branches
+        develop
+    end
+    
+    subgraph Release Branches
+        release
+        feature
+    end
+    
+    subgraph Feature Branches
+        f1
+        f2
+    end
+    
+    %% Layout adjustments
+    style main fill:#f9f,stroke:#333,stroke-width:4px
+    style develop fill:#bbf,stroke:#333,stroke-width:4px
+    style release fill:#bfb,stroke:#333,stroke-width:4px
+    style hotfix fill:#ffb,stroke:#333,stroke-width:4px
+    style feature fill:#fbf,stroke:#333,stroke-width:4px
+    style f1 fill:#fbb,stroke:#333,stroke-width:4px
+    style f2 fill:#fbb,stroke:#333,stroke-width:4px
+
