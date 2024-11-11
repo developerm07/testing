@@ -82,3 +82,39 @@ graph TD
     style f1 fill:#fbb,stroke:#333,stroke-width:4px
     style f2 fill:#fbb,stroke:#333,stroke-width:4px
 
+===========================================================
+
+graph TD
+    A[External Data Sources] -->|Batch/Streaming Ingestion| B[Data Ingestion Services]
+    B --> C[Data Lake]
+    C --> D[Common API for AI Services]
+    D --> E[AI Capabilities]
+    E --> F[Applications Layer]
+    F --> G[Application Databases]
+    
+    subgraph Data Layer
+        B[Data Ingestion Services]
+        C[Data Lake]
+    end
+
+    subgraph Real-Time Layer
+        H[Real-Time Data Services]
+    end
+
+    subgraph AI Layer
+        D[Common API for AI Services]
+        E[AI Capabilities]
+    end
+
+    subgraph Application Layer
+        F[Applications Layer]
+        G[Application Databases]
+    end
+
+    A --> H
+    H -->|Direct Real-Time Data| F
+    style Data Layer fill:#f9f,stroke:#333,stroke-width:2px
+    style Real-Time Layer fill:#cfc,stroke:#333,stroke-width:2px
+    style AI Layer fill:#ffc,stroke:#333,stroke-width:2px
+    style Application Layer fill:#ccf,stroke:#333,stroke-width:2px
+
