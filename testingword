@@ -81,3 +81,63 @@ public class DynamicJsonTransformer {
         return "/" + path;
     }
 }
+
+//////////////////
+
+Theme: Idea Incubator and Innovation
+Lever: Foster Continuous Ideation
+Actions:
+  - Centralized idea platform: Create a shared platform for submitting, reviewing, and voting on ideas.
+  - Cross-domain idea challenges: Launch challenges that encourage multi-team collaboration on solving business problems.
+Example: Automation solution for repetitive tasks, improving overall efficiency.
+
+Theme: Developer Community Building and Knowledge Sharing
+Lever: Enable Cross-Team Collaboration and Standardize Practices
+Actions:
+  - Team channels for knowledge sharing: Set up Teams channels for sharing key learnings, challenges, and solutions.
+  - Knowledge Sharing sessions: Schedule sessions for developers to present tools, frameworks, and techniques.
+  - Mentorship programs: Pair experienced developers with juniors to foster skill development and collaboration.
+  - Shared knowledge base: Create a central repository for code snippets, guides, and best practices.
+  - Brown Bag Sessions: Informal sessions for developers to discuss new technologies, tools, and organizational best practices.
+  - Coding Standards and Best Practices Manual: Create and maintain a comprehensive manual that includes coding standards, naming conventions, and development best practices.
+  - Coding Practices Workshops: Conduct workshops to reinforce and update coding standards across teams.
+  - Regular code reviews: Set up periodic code reviews to ensure adherence to coding standards and best practices.
+Example: A shared coding standards manual was adopted across all teams, ensuring uniformity in code quality and reducing errors during integration.
+
+Theme: Next-Generation CI/CD Pipelines, Automation, and Latest Technology Stack Adoptions
+Lever: Modernize Application Deployment and Build Processes
+Actions:
+  - GitHub Actions for CI: Integrate GitHub Actions for seamless, automated continuous integration processes.
+  - Harness for OpenShift deployment: Use Harness to automate deployments to OpenShift, ensuring consistency and faster delivery.
+Example: Migrating all apps to OpenShift with Harness aligns with organizational needs, adopting new technologies, and reducing security vulnerabilities.
+
+Theme: Cross-Functional Collaboration and Learning
+Lever: Build a Developer Pool for Addressing Cross-Functional Issues
+Actions:
+  - Cross-domain collaboration teams: Create teams of developers from different domains to share insights and tackle complex problems together.
+  - Cross-team knowledge sharing: Organize sessions where teams can share tools, technologies, and best practices.
+  - Developer pool for problem solving: Establish a developer pool to address cross-functional challenges.
+  - Coding Standards Alignment: Implement uniform coding standards across teams to ensure consistency and reduce technical debt.
+Example: Cross-functional collaboration streamlined error reporting, cutting troubleshooting time by 25%.
+
+Theme: Continuous Learning and Empowerment
+Lever: Provide Growth Opportunities through Coding Best Practices
+Actions:
+  - Innovation hours: Allocate a set number of hours per week for developers to explore new ideas and technologies while following the organization’s coding standards.
+  - Internal knowledge sharing: Encourage developers to share their knowledge through blogs, talks, and internal presentations while adhering to established best practices.
+  - Certification programs: Support developers with certifications to enhance their technical skills and keep them updated with the latest industry best practices.
+  - Coding Best Practices Updates: Continuously update the coding practices manual based on the latest industry standards and internal experiences.
+Example: Developers attended certification programs and applied the latest coding standards, improving application performance and reducing technical debt.
+
+Theme: Building Common Frameworks
+Lever: Standardize Practices and Improve Reusability
+Actions:
+  - Reusable frameworks for logging, monitoring, authentication, and error handling: Develop frameworks that are easily adoptable across various projects.
+  - Maintain shared libraries and modules: Keep libraries and modules updated for reuse across teams, speeding up development.
+  - Define contribution guidelines: Set clear guidelines for contributing to shared frameworks and libraries to ensure quality and ownership.
+  - Establish a framework review process: Implement a process for regular reviews and improvements to ensure scalability.
+  - Repository for reusable components: Set up an accessible repository for common components and tools.
+  - Enforce Coding Practices Uniformity: Standardize coding practices across teams to ensure consistency and reduce technical debt.
+  - Coding Standards Review: Regularly review coding practices and ensure new technologies or methodologies align with established standards.
+Example: Code review process ensured that new features adhered to the agreed-upon coding standards, reducing integration issues by 25%.
+
