@@ -1,0 +1,304 @@
+Team,Sprint,Issue ID,Story Points,Status,Notes,Sprint Start Date,Sprint End Date,Points Committed,Points Delivered,Predictability (%),RAG Status,Stories Planned,Stories Delivered,Stories Pulled Back,Stories Added Mid-sprint,Churn Status,Delivery Status,Action Item
+Team A,Sprint 1,TEAMA-100,3,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 1,TEAMA-101,8,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 1,TEAMA-102,5,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 1,TEAMA-103,4,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 1,TEAMA-104,4,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 1,TEAMA-105,4,Delivered,,2025-03-01,2025-03-14,28,28,100.0,Great,6,6,0,0,"0 added, 0 pulled back",Incomplete,Keep up the good work.
+Team A,Sprint 2,TEAMA-106,3,Delivered,,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-107,3,Delivered,,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-108,4,Delivered,,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-109,4,Delivered,,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-110,7,Pulled Back,Changed priorities,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-111,7,Pulled Back,Changed priorities,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 2,TEAMA-112,2,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,28,19,67.86,Requires Action,6,4,2,1,"1 added, 2 pulled back",Spillover,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-113,4,Delivered,,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-114,2,Delivered,,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-115,3,Delivered,,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-116,7,Delivered,,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-117,5,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-118,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-119,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-120,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-121,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-122,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-123,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-124,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team A,Sprint 3,TEAMA-125,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,39,23,58.97,Requires Action,10,4,0,3,"3 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team B,Sprint 1,TEAMB-126,6,Delivered,,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 1,TEAMB-127,3,Delivered,,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 1,TEAMB-128,7,Delivered,,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 1,TEAMB-129,5,Delivered,,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 1,TEAMB-130,8,Delivered,,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 1,TEAMB-131,7,Pulled Back,Changed priorities,2025-03-01,2025-03-14,36,29,80.56,Good,6,5,0,0,"0 added, 0 pulled back",Completed,Focus on estimation accuracy.
+Team B,Sprint 2,TEAMB-132,5,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-133,3,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-134,4,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-135,3,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-136,6,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-137,5,Delivered,,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-138,6,Pulled Back,Changed priorities,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-139,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 2,TEAMB-140,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,32,31,96.88,Great,7,6,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team B,Sprint 3,TEAMB-141,2,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-142,5,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-143,5,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-144,2,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-145,2,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-146,4,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-147,4,Delivered,,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-148,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-149,5,Pulled Back,Changed priorities,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-150,5,Pulled Back,Changed priorities,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team B,Sprint 3,TEAMB-151,5,Pulled Back,Changed priorities,2025-03-29,2025-04-11,42,24,57.14,Requires Action,11,7,2,0,"0 added, 2 pulled back",Completed,Improve planning or remove blockers.
+Team C,Sprint 1,TEAMC-152,5,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-153,6,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-154,5,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-155,3,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-156,4,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-157,7,Delivered,,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 1,TEAMC-158,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-01,2025-03-14,30,34,113.33,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team C,Sprint 2,TEAMC-159,2,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-160,2,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-161,5,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-162,4,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-163,4,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-164,3,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-165,5,Delivered,,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-166,4,Pulled Back,Changed priorities,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-167,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 2,TEAMC-168,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,29,29,100.0,Great,8,7,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-169,3,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-170,4,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-171,8,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-172,4,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-173,8,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-174,6,Delivered,,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-175,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-176,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team C,Sprint 3,TEAMC-177,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,33,46,139.39,Great,6,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team D,Sprint 1,TEAMD-178,2,Delivered,,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-179,6,Delivered,,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-180,5,Delivered,,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-181,4,Delivered,,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-182,6,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-183,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-184,2,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-185,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-186,5,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-187,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-188,5,Pulled Back,Changed priorities,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 1,TEAMD-189,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-01,2025-03-14,46,22,47.83,Requires Action,11,4,4,1,"1 added, 4 pulled back",Completed,Improve planning or remove blockers.
+Team D,Sprint 2,TEAMD-190,6,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-191,6,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-192,3,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-193,3,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-194,4,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-195,3,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-196,6,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-197,6,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-198,2,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-199,6,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 2,TEAMD-200,4,Delivered,,2025-03-15,2025-03-28,49,49,100.0,Great,11,11,0,0,"0 added, 0 pulled back",Spillover,Keep up the good work.
+Team D,Sprint 3,TEAMD-201,5,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-202,4,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-203,3,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-204,4,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-205,7,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-206,3,Delivered,,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-207,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-208,8,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-209,6,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-210,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-211,7,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-212,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-213,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-214,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team D,Sprint 3,TEAMD-215,2,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,57,36,63.16,Requires Action,12,6,5,3,"3 added, 5 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 1,TEAME-216,7,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-217,7,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-218,3,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-219,7,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-220,4,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-221,5,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-222,7,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-223,7,Delivered,,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-224,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 1,TEAME-225,5,Pulled Back,Changed priorities,2025-03-01,2025-03-14,56,47,83.93,Good,10,8,1,0,"0 added, 1 pulled back",Completed,Focus on estimation accuracy.
+Team E,Sprint 2,TEAME-226,5,Delivered,,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 2,TEAME-227,3,Delivered,,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 2,TEAME-228,7,Delivered,,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 2,TEAME-229,7,Delivered,,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 2,TEAME-230,4,Pulled Back,Changed priorities,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 2,TEAME-231,7,Pulled Back,Changed priorities,2025-03-15,2025-03-28,33,22,66.67,Requires Action,6,4,0,0,"0 added, 0 pulled back",Incomplete,Improve planning or remove blockers.
+Team E,Sprint 3,TEAME-232,4,Delivered,,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-233,3,Delivered,,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-234,3,Delivered,,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-235,5,Delivered,,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-236,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-237,7,Pulled Back,Changed priorities,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-238,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-239,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team E,Sprint 3,TEAME-240,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,25,24,96.0,Great,6,4,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team F,Sprint 1,TEAMF-241,3,Delivered,,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-242,3,Delivered,,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-243,2,Delivered,,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-244,1,Delivered,,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-245,1,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-246,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-247,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-248,2,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-249,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-250,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-251,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 1,TEAMF-252,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,32,9,28.12,Requires Action,12,4,1,0,"0 added, 1 pulled back",Spillover,Improve planning or remove blockers.
+Team F,Sprint 2,TEAMF-253,3,Delivered,,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-254,4,Delivered,,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-255,4,Delivered,,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-256,4,Delivered,,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-257,7,Delivered,,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-258,6,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-259,4,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-260,6,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-261,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-262,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 2,TEAMF-263,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,29,76.32,Good,8,5,2,3,"3 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team F,Sprint 3,TEAMF-264,3,Delivered,,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team F,Sprint 3,TEAMF-265,4,Delivered,,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team F,Sprint 3,TEAMF-266,4,Delivered,,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team F,Sprint 3,TEAMF-267,6,Delivered,,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team F,Sprint 3,TEAMF-268,6,Pulled Back,Changed priorities,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team F,Sprint 3,TEAMF-269,6,Pulled Back,Changed priorities,2025-03-29,2025-04-11,29,17,58.62,Requires Action,6,4,1,0,"0 added, 1 pulled back",Completed,Improve planning or remove blockers.
+Team G,Sprint 1,TEAMG-270,6,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-271,5,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-272,6,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-273,5,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-274,6,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-275,8,Delivered,,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 1,TEAMG-276,2,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-01,2025-03-14,36,38,105.56,Great,6,6,0,1,"1 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 2,TEAMG-277,7,Delivered,,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-278,8,Delivered,,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-279,7,Delivered,,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-280,3,Delivered,,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-281,8,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-282,5,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-283,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-284,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 2,TEAMG-285,2,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,37,97.37,Great,6,4,0,3,"3 added, 0 pulled back",Completed,Keep up the good work.
+Team G,Sprint 3,TEAMG-286,1,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-287,4,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-288,2,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-289,3,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-290,1,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-291,4,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-292,2,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-293,4,Delivered,,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-294,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-295,1,Pulled Back,Changed priorities,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-296,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-297,2,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team G,Sprint 3,TEAMG-298,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,26,36,138.46,Great,10,8,0,3,"3 added, 0 pulled back",Spillover,Keep up the good work.
+Team H,Sprint 1,TEAMH-299,4,Delivered,,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-300,3,Delivered,,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-301,6,Delivered,,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-302,6,Delivered,,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-303,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-304,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-305,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 1,TEAMH-306,2,Pulled Back,Changed priorities,2025-03-01,2025-03-14,33,19,57.58,Requires Action,8,4,3,0,"0 added, 3 pulled back",Completed,Improve planning or remove blockers.
+Team H,Sprint 2,TEAMH-307,7,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-308,5,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-309,4,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-310,5,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-311,3,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-312,4,Delivered,,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-313,5,Pulled Back,Changed priorities,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-314,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-315,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 2,TEAMH-316,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,33,41,124.24,Great,7,6,0,3,"3 added, 0 pulled back",Incomplete,Keep up the good work.
+Team H,Sprint 3,TEAMH-317,2,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-318,2,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-319,3,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-320,2,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-321,2,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-322,5,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-323,5,Delivered,,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-324,2,Pulled Back,Changed priorities,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-325,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-326,3,Pulled Back,Changed priorities,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-327,5,Pulled Back,Changed priorities,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team H,Sprint 3,TEAMH-328,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,34,24,70.59,Good,11,7,2,1,"1 added, 2 pulled back",Incomplete,Focus on estimation accuracy.
+Team I,Sprint 1,TEAMI-329,2,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-330,2,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-331,5,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-332,4,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-333,3,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-334,2,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-335,2,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-336,3,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-337,2,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-338,5,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-339,3,Delivered,,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 1,TEAMI-340,2,Pulled Back,Changed priorities,2025-03-01,2025-03-14,35,33,94.29,Great,12,11,1,0,"0 added, 1 pulled back",Completed,Keep up the good work.
+Team I,Sprint 2,TEAMI-341,2,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-342,4,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-343,1,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-344,2,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-345,4,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-346,4,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-347,2,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-348,3,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-349,2,Delivered,,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-350,1,Pulled Back,Changed priorities,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-351,2,Pulled Back,Changed priorities,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-352,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 2,TEAMI-353,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,27,28,103.7,Great,11,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-354,6,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-355,7,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-356,8,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-357,4,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-358,4,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-359,4,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-360,4,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-361,6,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-362,3,Delivered,,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-363,4,Pulled Back,Changed priorities,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-364,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-365,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team I,Sprint 3,TEAMI-366,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,50,53,106.0,Great,10,9,1,3,"3 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 1,TEAMJ-367,4,Delivered,,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-368,4,Delivered,,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-369,6,Delivered,,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-370,5,Delivered,,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-371,5,Delivered,,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-372,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-373,4,Pulled Back,Changed priorities,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-374,3,Pulled Back,Changed priorities,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-375,8,Pulled Back,Changed priorities,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-376,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 1,TEAMJ-377,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-01,2025-03-14,43,28,65.12,Requires Action,9,5,3,2,"2 added, 3 pulled back",Spillover,Improve planning or remove blockers.
+Team J,Sprint 2,TEAMJ-378,5,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-379,4,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-380,2,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-381,2,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-382,4,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-383,3,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-384,5,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-385,4,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-386,2,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-387,2,Delivered,,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-388,5,Pulled Back,Changed priorities,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-389,1,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 2,TEAMJ-390,4,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-15,2025-03-28,38,42,110.53,Great,11,10,1,2,"2 added, 1 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-391,3,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-392,4,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-393,2,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-394,7,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-395,5,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-396,2,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-397,6,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-398,6,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-399,7,Delivered,,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-400,7,Pulled Back,Changed priorities,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-401,3,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
+Team J,Sprint 3,TEAMJ-402,5,Added Mid-sprint,Mid-sprint addition due to urgent request,2025-03-29,2025-04-11,49,47,95.92,Great,10,9,0,2,"2 added, 0 pulled back",Incomplete,Keep up the good work.
