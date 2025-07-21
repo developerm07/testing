@@ -198,5 +198,108 @@ public class SplunkSignalFlowClient {
 }
 
 
+//approach 2:
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.*;
+import java.util.*;
+
+public class SplunkSignalFlowOneToOne {
+
+    private static final String SPLUNK_TOKEN = "YOUR_SPLUNK_API_TOKEN";
+    private static final String REALM = "us0"; // or eu0, jp1, etc.
+
+    public static void main(String[] args) throws Exception {
+        String signalFlowUrl = "https://api." + REALM + ".signalfx.com/v2/signalflow/execute";
+
+        // 1️⃣ Program: Count metric streams by af.acin and sf_service over 7 days
+        String program = "A = data('process.thread.count', filter=filter('af.acin', '*'), start=now()-7d, stop=now())"
+                       + ".count(by=['af.acin','sf_service'])"
+                       + ".publish(label='A');";
+
+        // 2️⃣ HTTP setup
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-SF-TOKEN", SPLUNK_TOKEN);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("program", program);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 3️⃣ Start SignalFlow execution
+        System.out.println("🚀 Starting SignalFlow execution...");
+
+        ResponseEntity<String> response = restTemplate.postForEntity(signalFlowUrl, request, String.class);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode responseJson = mapper.readTree(response.getBody());
+
+        String executionId = responseJson.get("executionId").asText();
+        String channelUrl = responseJson.get("channel").asText();
+        String streamUrl = "https://stream." + REALM + ".signalfx.com" + channelUrl;
+
+        // 4️⃣ Poll the result channel for computed streams
+        HttpHeaders streamHeaders = new HttpHeaders();
+        streamHeaders.set("X-SF-TOKEN", SPLUNK_TOKEN);
+        HttpEntity<Void> streamRequest = new HttpEntity<>(streamHeaders);
+
+        ResponseEntity<String> streamResponse = restTemplate.exchange(streamUrl, HttpMethod.GET, streamRequest, String.class);
+        String streamData = streamResponse.getBody();
+
+        // 5️⃣ One-to-One Mapping: acin → sf_service
+        Map<String, String> acinToServiceMap = new TreeMap<>();
+        Set<String> duplicates = new HashSet<>();
+
+        JsonNode events = mapper.readTree(streamData);
+        for (JsonNode event : events) {
+            if ("data".equals(event.path("messageType").asText())) {
+                JsonNode logicalStreams = event.path("logicalMetricStreams");
+                Iterator<String> keys = logicalStreams.fieldNames();
+                while (keys.hasNext()) {
+                    String key = keys.next(); // Example: metric0/af.acin=billing-service/sf_service=billing-api
+                    String acin = null, service = null;
+
+                    for (String part : key.split("/")) {
+                        if (part.startsWith("af.acin=")) acin = part.substring("af.acin=".length());
+                        if (part.startsWith("sf_service=")) service = part.substring("sf_service=".length());
+                    }
+
+                    if (acin != null && service != null) {
+                        if (!acinToServiceMap.containsKey(acin)) {
+                            acinToServiceMap.put(acin, service);
+                        } else if (!acinToServiceMap.get(acin).equals(service)) {
+                            // Conflict detected
+                            duplicates.add(acin);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 6️⃣ Print clean mappings
+        System.out.println("✅ Valid ACIN → Service Mappings:");
+        acinToServiceMap.forEach((acin, service) -> {
+            if (!duplicates.contains(acin)) {
+                System.out.println("  ✔ " + acin + " → " + service);
+            }
+        });
+
+        // 7️⃣ Alert for duplicates
+        if (!duplicates.isEmpty()) {
+            System.out.println("\n⚠️  Duplicate conflicts found:");
+            duplicates.forEach(acin -> {
+                System.out.println("  ❌ ACIN " + acin + " mapped to multiple services!");
+            });
+        } else {
+            System.out.println("\n🎉 All mappings valid (one-to-one).");
+        }
+
+        // 8️⃣ Stop the SignalFlow session
+        String stopUrl = "https://api." + REALM + ".signalfx.com/v2/signalflow/" + executionId + "/stop";
+        restTemplate.postForEntity(stopUrl, new HttpEntity<>(headers), String.class);
+        System.out.println("\n🛑 SignalFlow session stopped: " + executionId);
+    }
+}
 
 
