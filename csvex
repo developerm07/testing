@@ -99,3 +99,104 @@ public class ExcelStylingExample {
         }
     }
 }
+
+//Signalflow
+
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.*;
+
+import java.util.*;
+
+public class SplunkSignalFlowClient {
+    private static final String SPLUNK_TOKEN = "YOUR_SPLUNK_API_TOKEN";
+    private static final String REALM = "us0";
+
+    public static void main(String[] args) throws Exception {
+        String baseUrl = "https://api." + REALM + ".signalfx.com/v2/signalflow/execute";
+
+        // Step 1: Define the SignalFlow program (7-day window)
+        String signalFlowProgram = "A = data('process.thread.count', filter=filter('af.acin', '*'), start=now()-7d, stop=now())"
+                + ".count(by=['af.acin','sf_service'])"
+                + ".publish(label='A');";
+
+        // Step 2: Prepare headers & payload
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-SF-TOKEN", SPLUNK_TOKEN);
+
+        Map<String, Object> requestBody = new HashMap<>();
+        requestBody.put("program", signalFlowProgram);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
+
+        // Step 3: Create RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Step 4: Execute SignalFlow
+        ResponseEntity<String> response = restTemplate.postForEntity(baseUrl, request, String.class);
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Step 5: Parse sessionId from response
+        JsonNode root = mapper.readTree(response.getBody());
+        String channelUrl = root.get("channel").asText();
+        String executionId = root.get("executionId").asText();
+
+        System.out.println("Session started: " + executionId);
+
+        // Step 6: Get the result from the channel
+        // Will poll the SignalFlow channel URL (pseudo-real-time response stream)
+        String fullChannelUrl = "https://stream." + REALM + ".signalfx.com" + channelUrl;
+
+        HttpHeaders streamHeaders = new HttpHeaders();
+        streamHeaders.set("X-SF-TOKEN", SPLUNK_TOKEN);
+        HttpEntity<Void> streamRequest = new HttpEntity<>(streamHeaders);
+
+        ResponseEntity<String> streamResponse = restTemplate.exchange(fullChannelUrl, HttpMethod.GET, streamRequest, String.class);
+        String payload = streamResponse.getBody();
+
+        // Step 7: Extract datapoints: Map<acin, Set<service>>
+        Map<String, Set<String>> acinServiceMap = new HashMap<>();
+
+        JsonNode events = mapper.readTree(payload);
+
+        for (JsonNode event : events) {
+            if (event.has("messageType") && event.get("messageType").asText().equals("data")) {
+                JsonNode logicalMetricStreams = event.get("logicalMetricStreams");
+                Iterator<String> keys = logicalMetricStreams.fieldNames();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    // key format: metric0/af.acin=value/sf_service=value
+                    String[] parts = key.split("/");
+                    String acin = null;
+                    String service = null;
+                    for (String part : parts) {
+                        if (part.startsWith("af.acin=")) {
+                            acin = part.split("=")[1];
+                        } else if (part.startsWith("sf_service=")) {
+                            service = part.split("=")[1];
+                        }
+                    }
+                    if (acin != null && service != null) {
+                        acinServiceMap.computeIfAbsent(acin, k -> new HashSet<>()).add(service);
+                    }
+                }
+            }
+        }
+
+        // Step 8: Print map
+        System.out.println("✅ Onboarded components:");
+        acinServiceMap.forEach((acin, services) -> {
+            System.out.println("ACIN: " + acin + " => Services: " + services);
+        });
+
+        // Step 9: Stop the SignalFlow session
+        String stopUrl = "https://api." + REALM + ".signalfx.com/v2/signalflow/" + executionId + "/stop";
+        restTemplate.postForEntity(stopUrl, new HttpEntity<>(headers), String.class);
+        System.out.println("🔚 Session stopped.");
+    }
+}
+
+
+
+
