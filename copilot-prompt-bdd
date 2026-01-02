@@ -1,0 +1,615 @@
+Prompt1:
+Generate production-ready integration tests for my Spring Batch jobs with these requirements:
+
+CONTEXT
+- I will provide BatchConfiguration and batch flow classes.
+- Analyze: readers (Mongo/REST/others), processors, writers (Mongo/Kafka/REST), and job/step flow.
+
+EMBEDDED MONGO (REQUIRED)
+- Use de.bwaldvogel:mongo-java-server (NOT Flapdoodle or Testcontainers).
+- Use in-memory backend.
+- Provide a @TestConfiguration that exposes:
+  - MongoServer bean
+  - MongoDatabaseFactory
+  - MongoTemplate
+- Example shape (Copilot should adapt to my package and types):
+
+@TestConfiguration
+public class EmbeddedMongoConfig {
+
+    @Bean(destroyMethod = "shutdown")
+    public MongoServer mongoServer() {
+        MongoServer server = new MongoServer(new MemoryBackend());
+        server.bind();
+        return server;
+    }
+
+    @Bean
+    public MongoDatabaseFactory mongoDbFactory(MongoServer mongoServer) {
+        String uri = mongoServer.getConnectionString();
+        return new SimpleMongoClientDatabaseFactory(uri + "/testdb");
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate(MongoDatabaseFactory factory) {
+        return new MongoTemplate(factory);
+    }
+}
+
+LIVE + EMBEDDED DATA FLOW
+- There will be TWO Mongo connections:
+  - One to LIVE MongoDB (read-only, for seeding).
+  - One to embedded Mongo (job under test will use this).
+- Generate a MongoDataSeeder utility:
+  - Reads from live Mongo (by collection and optional query/limit).
+  - Inserts into embedded Mongo before each test.
+  - Provides cleanup helpers.
+
+Example shape:
+
+@Component
+public class MongoDataSeeder {
+
+    @Autowired
+    @Qualifier("liveMongoTemplate")
+    private MongoTemplate liveMongo;
+
+    @Autowired
+    @Qualifier("embeddedMongoTemplate")
+    private MongoTemplate embeddedMongo;
+
+    public void seed(String collection, int limit) {
+        List<Document> source = liveMongo.findAll(Document.class, collection)
+                                         .stream()
+                                         .limit(limit)
+                                         .toList();
+        embeddedMongo.insert(source, collection);
+    }
+
+    public void cleanupCollection(String collection) {
+        embeddedMongo.dropCollection(collection);
+    }
+
+    public void cleanupAll() {
+        embeddedMongo.getDb().listCollectionNames()
+                     .forEach(embeddedMongo::dropCollection);
+    }
+}
+
+REAL REST CALLS (REQUIRED)
+- Use the same RestTemplate/WebClient beans as production.
+- NO mocks, NO WireMock, NO fake servers.
+- Tests must call real dev/stage endpoints and assert their effects (status codes, data written back, etc.).
+
+SPRING BATCH TEST SETUP
+- Use @SpringBootTest + @SpringBatchTest + @ActiveProfiles("test").
+- Inject JobLauncherTestUtils and JobRepositoryTestUtils.
+- Before each test:
+  - Clear previous job executions.
+  - Cleanup embedded Mongo.
+  - Seed embedded Mongo with test data (via MongoDataSeeder).
+- After each test:
+  - Cleanup embedded Mongo.
+
+Example skeleton:
+
+@SpringBootTest
+@SpringBatchTest
+@ActiveProfiles("test")
+public class <JobName>IntegrationTest {
+
+    @Autowired
+    private JobLauncherTestUtils jobLauncherTestUtils;
+
+    @Autowired
+    private JobRepositoryTestUtils jobRepositoryTestUtils;
+
+    @Autowired
+    private MongoTemplate mongoTemplate; // embedded
+
+    @Autowired
+    private MongoDataSeeder dataSeeder;
+
+    @BeforeEach
+    void setUp() {
+        jobRepositoryTestUtils.removeJobExecutions();
+        dataSeeder.cleanupAll();
+    }
+
+    @AfterEach
+    void tearDown() {
+        dataSeeder.cleanupAll();
+    }
+}
+
+SCENARIOS TO IMPLEMENT
+
+1) Happy path
+- Seed N valid input records in embedded Mongo.
+- Run the job.
+- Assert:
+  - BatchStatus.COMPLETED.
+  - Expected read/write/skip counts.
+  - Duration and throughput within a configurable threshold.
+- Then query embedded Mongo to verify business logic for each record:
+  - Correct status transitions.
+  - Correct calculated fields (amounts, discounts, taxes, flags).
+  - Correct timestamps and audit fields.
+
+2) Positive business-logic verification by record
+- For a small set of hand-crafted input records (3–5):
+  - Insert them into the input collection.
+  - Run the job.
+  - For each record, fetch the output document from the target collection and assert:
+    - Field-by-field correctness according to business rules.
+    - Example pattern:
+
+@Test
+void testBusinessLogicForSingleRecord() {
+    InputEntity input = TestDataBuilder.input()
+        .withKey("KEY-001")
+        .withAmount(1000.0)
+        .withQuantity(5)
+        .build();
+
+    mongoTemplate.insert(input, "input_collection");
+
+    JobExecution execution = jobLauncherTestUtils.launchJob();
+    assertEquals(BatchStatus.COMPLETED, execution.getStatus());
+
+    OutputEntity output = mongoTemplate.findOne(
+        Query.query(Criteria.where("key").is("KEY-001")),
+        OutputEntity.class,
+        "output_collection"
+    );
+
+    assertNotNull(output);
+    // Example business rules:
+    assertEquals("COMPLETED", output.getStatus());
+    // discount, tax, finalAmount etc. according to my domain rules
+}
+
+3) Multiple rule-paths
+- Seed multiple records that cover different branches of business logic (e.g. no discount / 10% / 20%).
+- Run the job.
+- For each record, assert:
+  - The correct branch was taken.
+  - All derived values are correct.
+
+4) Integration with real external REST APIs
+- Seed input records that will trigger outbound REST calls.
+- Run the job (using real endpoints).
+- After the job:
+  - Query embedded Mongo to verify enriched or updated data.
+  - Optionally call the external system again (GET) to verify side effects (e.g. status changes).
+
+Pattern:
+
+@Test
+void testExternalEnrichment() {
+    Customer c = TestDataBuilder.customer()
+        .withCustomerId("CUST-001")
+        .withCreditScore(0)
+        .withRiskCategory("UNKNOWN")
+        .build();
+
+    mongoTemplate.insert(c, "customers");
+
+    JobExecution execution = jobLauncherTestUtils.launchJob();
+    assertEquals(BatchStatus.COMPLETED, execution.getStatus());
+
+    Customer enriched = mongoTemplate.findOne(
+        Query.query(Criteria.where("customerId").is("CUST-001")),
+        Customer.class,
+        "customers"
+    );
+
+    assertNotNull(enriched.getCreditScore());
+    // Assert riskCategory, eligibility flags, etc., based on rules.
+}
+
+5) Failure scenarios
+- API error: external service returns HTTP 4xx/5xx.
+- Network timeout.
+- Bad data in Mongo.
+- For each:
+  - Configure input data that triggers the failure (no mocking).
+  - Run the job.
+  - Assert:
+    - Job status (FAILED or COMPLETED with skips) according to the design.
+    - Skip count / retry count.
+    - Error details in StepExecution.
+    - Partial writes are handled as per requirements (rollback or compensating logic).
+
+6) Empty dataset
+- Ensure input collection is empty.
+- Run the job.
+- Assert:
+  - COMPLETED.
+  - readCount == 0, writeCount == 0.
+  - No unexpected side effects.
+
+7) Restart / idempotency (if job supports restart)
+- First run: cause the job to fail mid-way (e.g. by data setup).
+- Second run: fix the data and restart with the same job parameters.
+- Assert:
+  - Restart from the correct step/chunk.
+  - No double-processing of already successful items.
+
+8) Performance scenario (simplified)
+- Seed a larger dataset (e.g. 5k–10k records) from live Mongo into embedded.
+- Run the job.
+- Measure:
+  - Duration.
+  - Read/write count.
+  - Records per second.
+- Assert the job completes within a reasonable upper bound and throughput above a minimum.
+
+Pattern:
+
+@Test
+void testPerformanceForLargeDataset() {
+    dataSeeder.seed("input_collection", 10000);
+
+    long start = System.currentTimeMillis();
+    JobExecution execution = jobLauncherTestUtils.launchJob();
+    long end = System.currentTimeMillis();
+
+    assertEquals(BatchStatus.COMPLETED, execution.getStatus());
+
+    StepExecution step = execution.getStepExecutions().iterator().next();
+    long duration = end - start;
+    long count = step.getReadCount();
+
+    double rps = (double) count / (duration / 1000.0);
+    // add asserts for duration and rps
+}
+
+HELPER CLASSES
+- TestDataBuilder: static factory methods to build domain entities with sensible defaults and overrides for specific fields.
+- BusinessLogicAssertions: reusable assertion helpers for domain-specific rules (e.g. discount logic, risk category calculation).
+  - Example shape:
+
+public final class BusinessLogicAssertions {
+
+    public static void assertProcessedCorrectly(InputEntity in, OutputEntity out) {
+        assertEquals(in.getId(), out.getId());
+        assertEquals("PROCESSED", out.getStatus());
+        // additional domain checks...
+    }
+}
+
+STRUCTURE
+- Create:
+  - EmbeddedMongoConfig
+  - Test Mongo configuration (live + embedded templates)
+  - MongoDataSeeder
+  - TestDataBuilder
+  - BusinessLogicAssertions
+  - One *IntegrationTest class per job.
+
+IMPORTANT CONSTRAINTS
+- Embedded Mongo MUST use mongo-java-server.
+- REST calls MUST be real (no mocks).
+- Core validation MUST be done by querying embedded Mongo after the job and checking that business rules executed correctly.
+- Cover happy path, multiple business-rule branches, negative/failure cases, empty dataset, restart (if applicable), and basic performance.
+- All generated code MUST compile.
+- NO pseudocode.
+- NO TODOs.
+- NO "assume" statements.
+- Use actual Spring Batch APIs.
+
+Prompt 2:
+You are a senior Java engineer specializing in production-grade Spring Batch integration testing.
+
+STRICT REQUIREMENTS
+- All generated code MUST compile.
+- NO pseudocode.
+- NO TODOs.
+- NO assumptions.
+- NO placeholders.
+- NO Mockito.
+- NO WireMock.
+- NO Testcontainers.
+- NO Flapdoodle.
+- NO @MockBean.
+- Use real Spring beans only.
+
+==================================================
+CONTEXT
+==================================================
+I will provide:
+- BatchConfiguration classes
+- Job and Step flow classes
+
+You MUST analyze the provided code before generating tests.
+
+==================================================
+STEP 1 — MANDATORY ANALYSIS
+==================================================
+Analyze the batch configuration and explicitly identify:
+- Job name(s)
+- Step name(s)
+- ItemReader implementations (Mongo / REST / others)
+- ItemProcessor business rules
+- ItemWriter targets (Mongo / REST / Kafka / others)
+- Input and output Mongo collections
+- Transaction boundaries and chunk size
+- Retry and skip configuration
+- Restartability behavior
+- Listener usage (JobExecutionListener, StepExecutionListener)
+
+Do NOT generate tests until this analysis is complete.
+
+==================================================
+STEP 2 — CODE GENERATION
+==================================================
+Generate production-ready Spring Batch integration tests that validate:
+- End-to-end batch flow
+- Business logic correctness
+- MongoDB state transitions
+- External REST integrations
+- Fault tolerance (retry / skip)
+- Restart / idempotency
+- Basic performance characteristics
+
+==================================================
+EMBEDDED MONGO (MANDATORY)
+==================================================
+- Use de.bwaldvogel:mongo-java-server
+- Use MemoryBackend (in-memory)
+- DO NOT use Flapdoodle or Testcontainers
+
+Provide a @TestConfiguration that exposes:
+- MongoServer bean (with destroyMethod = "shutdown")
+- MongoDatabaseFactory
+- MongoTemplate
+
+Example structure (adapt to my package and types):
+
+@TestConfiguration
+public class EmbeddedMongoConfig {
+
+    @Bean(destroyMethod = "shutdown")
+    public MongoServer mongoServer() {
+        MongoServer server = new MongoServer(new MemoryBackend());
+        server.bind();
+        return server;
+    }
+
+    @Bean
+    public MongoDatabaseFactory mongoDbFactory(MongoServer mongoServer) {
+        String uri = mongoServer.getConnectionString();
+        return new SimpleMongoClientDatabaseFactory(uri + "/testdb");
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate(MongoDatabaseFactory factory) {
+        return new MongoTemplate(factory);
+    }
+}
+
+==================================================
+LIVE + EMBEDDED MONGO (DUAL CONNECTIONS)
+==================================================
+There MUST be two Mongo connections:
+
+1) liveMongoTemplate
+   - Connects to real LIVE MongoDB
+   - Read-only
+   - Used ONLY for seeding test data
+
+2) embeddedMongoTemplate
+   - Connects to mongo-java-server
+   - Used by the Spring Batch job under test
+
+RULES:
+- The batch job MUST use embeddedMongoTemplate only
+- Live Mongo must NEVER be used by the batch job
+
+==================================================
+MongoDataSeeder (REQUIRED)
+==================================================
+Generate a MongoDataSeeder utility with:
+- Reading from liveMongoTemplate
+- Inserting into embeddedMongoTemplate
+- Cleanup helpers
+
+Example shape:
+
+@Component
+public class MongoDataSeeder {
+
+    @Autowired
+    @Qualifier("liveMongoTemplate")
+    private MongoTemplate liveMongo;
+
+    @Autowired
+    @Qualifier("embeddedMongoTemplate")
+    private MongoTemplate embeddedMongo;
+
+    public void seed(String collection, int limit) {
+        List<Document> source = liveMongo.findAll(Document.class, collection)
+                                         .stream()
+                                         .limit(limit)
+                                         .toList();
+        embeddedMongo.insert(source, collection);
+    }
+
+    public void cleanupCollection(String collection) {
+        embeddedMongo.dropCollection(collection);
+    }
+
+    public void cleanupAll() {
+        embeddedMongo.getDb()
+                     .listCollectionNames()
+                     .forEach(embeddedMongo::dropCollection);
+    }
+}
+
+==================================================
+REAL REST CALLS (MANDATORY)
+==================================================
+- Use the SAME RestTemplate / WebClient beans as production
+- Call real dev/stage endpoints
+- Assert:
+  - HTTP status codes
+  - Response bodies (where applicable)
+  - Side effects in embedded Mongo
+- NO mocks
+- NO fake servers
+- NO WireMock
+
+==================================================
+SPRING BATCH TEST SETUP
+==================================================
+- Use @SpringBootTest
+- Use @SpringBatchTest
+- Use @ActiveProfiles("test")
+- Inject:
+  - JobLauncherTestUtils
+  - JobRepositoryTestUtils
+
+Before each test:
+- Remove previous job executions
+- Cleanup embedded Mongo
+- Seed embedded Mongo with test data
+
+After each test:
+- Cleanup embedded Mongo
+
+Example skeleton:
+
+@SpringBootTest
+@SpringBatchTest
+@ActiveProfiles("test")
+public class <JobName>IntegrationTest {
+
+    @Autowired
+    private JobLauncherTestUtils jobLauncherTestUtils;
+
+    @Autowired
+    private JobRepositoryTestUtils jobRepositoryTestUtils;
+
+    @Autowired
+    @Qualifier("embeddedMongoTemplate")
+    private MongoTemplate mongoTemplate;
+
+    @Autowired
+    private MongoDataSeeder dataSeeder;
+
+    @BeforeEach
+    void setUp() {
+        jobRepositoryTestUtils.removeJobExecutions();
+        dataSeeder.cleanupAll();
+    }
+
+    @AfterEach
+    void tearDown() {
+        dataSeeder.cleanupAll();
+    }
+}
+
+==================================================
+SCENARIOS TO IMPLEMENT
+==================================================
+
+1) Happy Path
+- Seed N valid input records
+- Run the job
+- Assert:
+  - BatchStatus.COMPLETED
+  - Read / write / skip counts
+  - Duration and throughput (configurable thresholds)
+- Query embedded Mongo and validate:
+  - Status transitions
+  - Calculated fields (amounts, discounts, taxes, flags)
+  - Audit fields and timestamps
+
+--------------------------------------------------
+
+2) Business Logic Validation (Record-Level)
+- Insert 3–5 handcrafted input records
+- Run the job
+- Fetch output records
+- Assert field-by-field correctness
+
+--------------------------------------------------
+
+3) Multiple Rule Paths
+- Seed records covering all logic branches
+- Run the job
+- Assert correct branch execution per record
+
+--------------------------------------------------
+
+4) Real External REST Integration
+- Seed records that trigger outbound REST calls
+- Run the job
+- Assert:
+  - Mongo enrichment
+  - Optional verification via follow-up REST GET calls
+
+--------------------------------------------------
+
+5) Failure Scenarios
+- External API 4xx / 5xx
+- Network timeout
+- Invalid Mongo data
+
+For each:
+- Run the job
+- Assert:
+  - Job status (FAILED or COMPLETED with skips)
+  - Retry and skip counts
+  - StepExecution failure details
+  - Correct rollback or compensation behavior
+
+--------------------------------------------------
+
+6) Empty Dataset
+- Ensure input collection is empty
+- Run the job
+- Assert:
+  - COMPLETED
+  - readCount == 0
+  - writeCount == 0
+  - No side effects
+
+--------------------------------------------------
+
+7) Restart / Idempotency (if supported)
+- First run fails mid-way
+- Second run restarts with SAME JobParameters
+- Assert:
+  - Correct restart point
+  - No double-processing
+
+--------------------------------------------------
+
+8) Performance (Simplified)
+- Seed 5k–10k records from live Mongo
+- Run the job
+- Measure:
+  - Duration
+  - Read/write counts
+  - Records per second
+- Assert against configurable thresholds
+
+==================================================
+HELPER CLASSES (REQUIRED)
+==================================================
+- EmbeddedMongoConfig
+- MongoDataSeeder
+- TestDataBuilder
+- BusinessLogicAssertions
+- One IntegrationTest class per batch job
+
+==================================================
+FINAL CONSTRAINTS
+==================================================
+- Embedded Mongo MUST use mongo-java-server
+- REST calls MUST be real
+- Core validation MUST query embedded Mongo
+- Tests must be deterministic and production-ready
+
