@@ -390,6 +390,63 @@ WAIT FOR CONFIRMATION if required information is missing before proceeding.
 
 Now analyze the provided Java code and proceed accordingly.
 
+GitHu AUto merges:
+You are acting as a senior backend engineer.
+
+Goal:
+Build a robust, production-grade Spring Boot service that updates a file in a
+GitHub repository via PR and auto-merges it.
+
+Hard constraints:
+- Multi-cluster, horizontally scaled Spring Boot deployment
+- No database
+- No Kafka, SQS, Redis, or any queue
+- No schedulers or background workers
+- No GitHub polling
+- No GitHub webhooks
+- All operations are synchronous and initiated by a UI request
+- End-to-end execution time is a few seconds
+
+Key architectural rules:
+1. GitHub is the ONLY shared state and coordination mechanism
+2. All concurrency control must be done using GitHub APIs
+3. Distributed locking must be implemented using a GitHub Pull Request comment
+4. Lock must be a hidden HTML comment with a unique marker (AUTO_MERGE_LOCK)
+5. Lock acquisition must be atomic and cluster-safe
+6. Lock must include timestamp and support TTL-based cleanup
+7. Lock retries must be bounded and use exponential backoff + jitter
+8. No in-memory locks, synchronized blocks, or label-based locking
+
+Required workflow:
+1. Create a deterministic branch name using a request-id
+2. Create the branch from main if it does not exist
+3. Update file content using SHA-based compare-and-swap
+4. Create or reuse a PR for the branch
+5. Attempt to acquire a merge lock by creating a PR comment
+6. If locked, retry a limited number of times, otherwise return HTTP 409
+7. Sync PR branch with main using GitHub API
+8. If conflicts occur, close the PR with reason 'mergeconflicts'
+9. If clean, merge the PR using GitHub merge API
+10. Release the lock by deleting the lock comment
+
+Error handling:
+- All operations must be idempotent
+- Duplicate UI requests must not create duplicate merges
+- Pod crashes must not cause permanent locks
+- Conflicts must be detected and handled deterministically
+
+Non-goals:
+- FIFO queues
+- Event-driven or webhook-based systems
+- Long-running background merge processors
+
+Code expectations:
+- Use Spring Boot
+- Use WebClient or RestTemplate for GitHub API
+- Keep code readable and production-ready
+- Explicitly document lock behavior and concurrency guarantees
+
+
   
 
 
